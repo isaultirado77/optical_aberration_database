@@ -14,6 +14,12 @@
     - [X] add_dust
     - [X] vibration_blurr 
 
+- [ ] metrics
+    - [ ] image_quality.py
+    - [ ] satistical.py
+    - [ ] texture.py
+    - [ ] zernike_metrics.py
+
 - [ ] generate_dataset.py
     - [ ] configure for .yaml files for configuration
     - [ ] use tqdm to show progress (optional)
