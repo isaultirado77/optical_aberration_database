@@ -9,18 +9,20 @@
     - [X] generate_interferogram (write doc)
 
 - [ ] utils.py
-    - [ ] gaussian noise
-    - [ ]
-    - [ ]
+    - [X] add_gaussian_noise
+    - [X] add_poisson_noise
+    - [X] add_dust
+    - [X] vibration_blurr 
 
 - [ ] generate_dataset.py
-    - [ ] 
+    - [ ] configure for .yaml files for configuration
     - [ ] use tqdm to show progress (optional)
 
 - [ ] generate_dataset.py
     - [X] generate_aberrations
     - [X] save_metadata
     - [X] generate_image_and_save
+    - [X] add_vibration_blurr
 
 - [ ] investigate licences and creative commons
 - [ ] investigate multiprocessing for optimization of the dataset generation.  
