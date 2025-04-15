@@ -1,8 +1,9 @@
 metadata:
-  author: "Isaúl Tirado López"
+  author: "isaul"
   description: "Pure optical aberration dataset with realistic noise profiles"
   license: "CC-BY-NC-SA-4.0"
   date: "2025-04-13"
+  seed: 42
 
 optical_parameters:
   wavelength: 632.8nm
