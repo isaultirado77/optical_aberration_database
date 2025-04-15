@@ -32,3 +32,17 @@
 
 - [ ] investigate licences and creative commons
 - [ ] investigate multiprocessing for optimization of the dataset generation.  
+
+git commit -m "Functions implemented: 
+- metrics: {
+    __init__.py: implemented
+    statistical.py: calculate statistics, auxilars
+    image_quality.py: calculate_pnsr, calculate_ssim
+    texture.py: calculate_haralick_features
+
+}
+
+ready for testing
+"
+
+# https://www.scirp.org/journal/paperinformation?paperid=90911
