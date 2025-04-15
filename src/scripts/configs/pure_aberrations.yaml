@@ -10,6 +10,8 @@ optical_parameters:
   na: 0.25
   pixel_size: 5.86µm
   wavefront_units: µm
+  image_height = 512
+  image_width = 512
 
 noise_profiles:
   default_gaussian:
@@ -22,8 +24,9 @@ noise_profiles:
     max_radius: 15
     intensity: 0.0
   default_vibration:
-    amplitude_px: [0.8, 1.5]
-    num_frames: 5
+    max_kernel_size = 15
+    intensity = 1.0
+
 
 classes:
   piston:

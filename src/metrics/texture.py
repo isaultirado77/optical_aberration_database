@@ -1,3 +1,4 @@
+from typing import Dict
 import numpy as np
 from skimage.feature import graycomatrix, graycoprops
 

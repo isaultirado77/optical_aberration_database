@@ -15,14 +15,15 @@
     - [X] vibration_blurr 
 
 - [ ] metrics
-    - [ ] image_quality.py
-    - [ ] satistical.py
-    - [ ] texture.py
-    - [ ] zernike_metrics.py
+    - [X] image_quality.py
+    - [X] satistical.py
+    - [X] texture.py
+    - [X] zernike_metrics.py
 
 - [ ] generate_dataset.py
-    - [ ] configure for .yaml files for configuration
+    - [X] configure for .yaml files for configuration
     - [ ] use tqdm to show progress (optional)
+    - [ ] use argparse for flexibility
 
 - [ ] generate_dataset.py
     - [X] generate_aberrations
@@ -33,16 +34,10 @@
 - [ ] investigate licences and creative commons
 - [ ] investigate multiprocessing for optimization of the dataset generation.  
 
-git commit -m "Functions implemented: 
-- metrics: {
-    __init__.py: implemented
-    statistical.py: calculate statistics, auxilars
-    image_quality.py: calculate_pnsr, calculate_ssim
-    texture.py: calculate_haralick_features
-
-}
-
-ready for testing
+git commit -m "
+implemented: 
+    generate_dataset.py:
+        - DatasetGenerator class: 
+            - _generate_coefficients (testing)
+            - _apply_noises (testing)
 "
-
-# https://www.scirp.org/journal/paperinformation?paperid=90911

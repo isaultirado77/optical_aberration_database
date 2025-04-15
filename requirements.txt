@@ -6,3 +6,4 @@ matplotlib
 jupyter
 pandas
 opencv-python-headless
+pyyaml
