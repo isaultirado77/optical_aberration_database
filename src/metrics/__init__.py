@@ -11,14 +11,13 @@ Bibliografia:
 """
 
 from .statistical import calculate_statistics
-from .image_quality import calculate_psnr, calculate_ssim
+from .image_quality import calculate_image_quality_metrics
 from .texture import calculate_haralick_features
 from .zernike_metrics import calculate_wavefront_error
 
 __all__ = [
     'calculate_statistics',
-    'calculate_psnr',
-    'calculate_ssim',
+    'calculate_image_quality_metrics',
     'calculate_haralick_features',
     'calculate_wavefront_error'
 ]

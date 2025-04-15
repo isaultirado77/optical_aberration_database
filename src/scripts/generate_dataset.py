@@ -16,10 +16,9 @@ from src.aberrations import (
 )
 from src.metrics import (
     calculate_statistics, 
-    calculate_psnr, 
-    calculate_ssim, 
     calculate_haralick_features, 
-    calculate_wavefront_error
+    calculate_wavefront_error, 
+    calculate_image_quality_metrics
 )
 
 @dataclass
@@ -124,13 +123,13 @@ class DatasetGenerator:
                 interferogram = generate_interferogram(
                     coefficients,
                     shape=(
-                        self.config["optical_parameters"].get("image_height", 512),
-                        self.config["optical_parameters"].get("image_width", 512)
+                        self.config["metadata"].get("image_height", 512),
+                        self.config["metadata"].get("image_width", 512)
                     )
                 )
                 
                 # 3. Aplicar ruidos
-                interferogram = self._apply_noises(interferogram, class_config.get("noise", {}))
+                noisy_interferogram = self._apply_noises(interferogram, class_config.get("noise", {}))
                 
                 # 4. Guardar imagen
                 image_id = f"{class_name}_{i:04d}"
@@ -139,31 +138,55 @@ class DatasetGenerator:
                     raw_dir / f"{image_id}.tiff",
                 )
 
-                # 5. Registrar métricas
+                # 5. Generar métricas
+                metrics = self._extract_data(interferogram, noisy_interferogram, coefficients)
+
+                # 6. Registrar métricas
                 metrics_data.append({
                     "image_id": image_id, 
                     "class": class_name, 
-                    "coefficients": str(coefficients)
+                    **metrics
                 })
         
         # Guardar datos y métricas
         self._save_metadata(output_dir)
         pd.DataFrame(metrics_data).to_csv(output_dir / "metrics.csv")
 
-    def _extract_data(self, interferogram: np.ndarray, coefficients: Dict[Tuple[int, int], float]) -> Dict:
+    def _extract_data(self,
+                      interferogram: np.ndarray,
+                      noisy_interferogram: np.ndarray,
+                      coefficients: Dict[Tuple[int, int], float]) -> Dict:
         """Extrae todas las métricas y coeficientes para guardar en CSV"""
 
+        intems_view = coefficients.items()
+        interator = iter(intems_view)
+        tuple_pair = next(interator)
+        (n, m), coeff = tuple_pair  # usar next(iter(coefficients.items()))
         stats = calculate_statistics(interferogram)
         wavefront_metrics = calculate_wavefront_error(interferogram)
         texture_metrics = calculate_haralick_features(interferogram)
-    
-        # 2. Organizar coeficientes de Zernike en columnas separadas
-        zernike_coeffs = {}
-        for (n, m), value in coefficients.items():
-            zernike_coeffs[f"Z_{n}_{m}"] = value
-    
-        # 3. Combinar todos los datos
+        quality_metrics = calculate_image_quality_metrics(interferogram, noisy_interferogram)
+  
+        # Combinar todos los datos
         return {
+            'n': n,
+            'm': m,
+            'coeff': coeff, 
+            'mean': stats["mean"], 
+            'variance': stats["variance"],
+            'skewness': stats["skewness"], 
+            'kurtosis': stats["kurtosis"], 
+            'energy': stats["energy"], 
+            'entropy': stats["entropy"], 
+            'rms_wavefront': wavefront_metrics["rms_wavefront"], 
+            'peak_to_valley': wavefront_metrics["peak_to_valley"], 
+            'strehl_ratio': wavefront_metrics["strehl_ratio"], 
+            'contrast': texture_metrics["contrast"], 
+            'dissimilarity': texture_metrics["dissimilarity"], 
+            'homogeneity': texture_metrics["homogeneity"], 
+            'energy': texture_metrics["energy"], 
+            'peak_signal_noise_ratio': quality_metrics["psnr"], 
+            'structural_similarity': quality_metrics['ssim']
         }
 
     def _save_metadata(self, output_dir: Path):
@@ -171,6 +194,8 @@ class DatasetGenerator:
         metadata = {
             "generation_date": pd.Timestamp.now().isoformat(),
             "optical_parameters": self.config["optical_parameters"],
+            "image_height": self.config["metadata"].get("image_height", 512),
+            "image_width": self.config["metadata"].get("image_width", 512),
             "noise_profiles": self.config["noise_profiles"],
             "classes": list(self.config["classes"].keys())
         }
@@ -182,3 +207,5 @@ class DatasetGenerator:
 if __name__ == "__main__": 
     config_path = Path(__file__).parent / "configs" / "pure_aberrations.yaml"
     generator = DatasetGenerator(config_path, print_config=False)
+
+    

@@ -4,14 +4,15 @@ metadata:
   license: "CC-BY-NC-SA-4.0"
   date: "2025-04-13"
   seed: 42
+  image_height = 512
+  image_width = 512
+
 
 optical_parameters:
   wavelength: 632.8nm
   na: 0.25
   pixel_size: 5.86µm
   wavefront_units: µm
-  image_height = 512
-  image_width = 512
 
 noise_profiles:
   default_gaussian:

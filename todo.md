@@ -22,7 +22,7 @@
 
 - [ ] generate_dataset.py
     - [X] configure for .yaml files for configuration
-    - [ ] use tqdm to show progress (optional)
+    - [X] use tqdm to show progress (optional)
     - [ ] use argparse for flexibility
 
 - [ ] generate_dataset.py
@@ -35,9 +35,10 @@
 - [ ] investigate multiprocessing for optimization of the dataset generation.  
 
 git commit -m "
+changed: use new variable: noisy_interferogram to calculate image quality metrics
+problems: yaml functions are not working
 implemented: 
     generate_dataset.py:
         - DatasetGenerator class: 
-            - _generate_coefficients (testing)
-            - _apply_noises (testing)
+            - _extract_metrics (testing)
 "
