@@ -34,11 +34,9 @@
 - [ ] investigate licences and creative commons
 - [ ] investigate multiprocessing for optimization of the dataset generation.  
 
-git commit -m "
-changed: use new variable: noisy_interferogram to calculate image quality metrics
-problems: yaml functions are not working
-implemented: 
-    generate_dataset.py:
-        - DatasetGenerator class: 
-            - _extract_metrics (testing)
-"
+git commit -m "feat(blur): enhance motion blur and dataset prep
+
+- Rewrite add_random_motion_blur() with:
+  * Fixed kernel generation
+  * Multi-channel support
+- Normalize pure_aberrations syntax"

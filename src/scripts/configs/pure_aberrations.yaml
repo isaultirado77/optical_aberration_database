@@ -4,8 +4,8 @@ metadata:
   license: "CC-BY-NC-SA-4.0"
   date: "2025-04-13"
   seed: 42
-  image_height = 512
-  image_width = 512
+  image_height: 256
+  image_width: 256
 
 
 optical_parameters:
@@ -25,8 +25,8 @@ noise_profiles:
     max_radius: 15
     intensity: 0.0
   default_vibration:
-    max_kernel_size = 15
-    intensity = 1.0
+    max_kernel_size: 21
+    intensity: 1.0
 
 
 classes:
@@ -38,7 +38,7 @@ classes:
       poisson: false
       dust: false
       vibration: false
-    samples: 1000
+    samples: 100
 
   ytilt:
     coefficients:
@@ -46,7 +46,7 @@ classes:
     noise:
       gaussian: true
       vibration: true  # Típico en sistemas mecánicos
-    samples: 1000
+    samples: 100
 
   xtilt:
     coefficients:
@@ -54,7 +54,7 @@ classes:
     noise:
       gaussian: true
       vibration: true
-    samples: 1000
+    samples: 100
 
   defocus:
     coefficients:
@@ -63,21 +63,21 @@ classes:
       gaussian: true
       poisson: true  # Fundamental en desenfoque
       dust: true     # Partículas en lentes
-    samples: 1000
+    samples: 100
 
   primary_astigmatism_0:
     coefficients:
       - [2, -2, -1.2, 1.2]
     noise:
       gaussian: true
-    samples: 1000
+    samples: 100
 
   primary_astigmatism_45:
     coefficients:
       - [2, 2, -1.2, 1.2]
     noise:
       gaussian: true
-    samples: 1000
+    samples: 100
 
   ycoma:
     coefficients:
@@ -85,7 +85,7 @@ classes:
     noise:
       gaussian: true
       dust: true  # Mayor probabilidad en bordes ópticos
-    samples: 1000
+    samples: 100
 
   xcoma:
     coefficients:
@@ -93,21 +93,21 @@ classes:
     noise:
       gaussian: true
       dust: true
-    samples: 1000
+    samples: 100
 
   trefoil_0:
     coefficients:
       - [3, -3, -0.6, 0.6]
     noise:
       gaussian: true
-    samples: 1000
+    samples: 100
 
   trefoil_30:
     coefficients:
       - [3, 3, -0.6, 0.6]
     noise:
       gaussian: true
-    samples: 1000
+    samples: 100
 
   primary_spherical:
     coefficients:
@@ -115,32 +115,32 @@ classes:
     noise:
       gaussian: true
       poisson: true  # Relevante en alta precisión
-    samples: 1000
+    samples: 100
 
   secondary_astigmatism_0:
     coefficients:
       - [4, -2, -0.4, 0.4]
     noise:
       gaussian: true
-    samples: 1000
+    samples: 100
 
   secondary_astigmatism_45:
     coefficients:
       - [4, 2, -0.4, 0.4]
     noise:
       gaussian: true
-    samples: 1000
+    samples: 100
 
   tetrafoil_0:
     coefficients:
       - [4, -4, -0.3, 0.3]
     noise:
       gaussian: true
-    samples: 1000
+    samples: 100
 
   tetrafoil_22:
     coefficients:
       - [4, 4, -0.3, 0.3]
     noise:
       gaussian: true
-    samples: 1000
+    samples: 100

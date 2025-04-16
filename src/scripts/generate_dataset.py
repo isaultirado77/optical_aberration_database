@@ -34,8 +34,6 @@ class DatasetGenerator:
         self.rng = np.random.default_rng(self.config['metadata'].get("seed", 42))  # Generador de números aleatorios con semilla fija (para reproducibilidad).
         if print_config: 
             self._print_config()
-        p = self.config["noise_profiles"]["default_gaussian"]
-        print(p['sigma_percent'], p['clip'])
 
     def _load_config(self, path: Path) -> Dict: 
         with open(path) as f: 
@@ -206,6 +204,9 @@ class DatasetGenerator:
 
 if __name__ == "__main__": 
     config_path = Path(__file__).parent / "configs" / "pure_aberrations.yaml"
-    generator = DatasetGenerator(config_path, print_config=False)
+    generator = DatasetGenerator(config_path, print_config=True)
+    
+    output_dir = Path("data/testing_generated") 
+    generator.generate_dataset(output_dir=output_dir)
 
     
