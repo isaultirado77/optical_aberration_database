@@ -111,9 +111,9 @@ class DatasetGenerator:
         # Generar imágenes para cada clase
         for class_name, class_config in tqdm(
             self.config["classes"].items(),
-            desc="Generando clases de aberración"
+            desc="Generating aberration classes"
         ):
-            for i in tqdm(range(class_config["samples"]), desc=f"Clase {class_name}", leave=False):
+            for i in tqdm(range(class_config["samples"]), desc=f"Class {class_name}", leave=False):
                 # 1. Generar coeficientes
                 coefficients = self._generate_coefficients(class_config)
                 
@@ -148,7 +148,7 @@ class DatasetGenerator:
         
         # Guardar datos y métricas
         self._save_metadata(output_dir)
-        pd.DataFrame(metrics_data).to_csv(output_dir / "metrics.csv")
+        pd.DataFrame(metrics_data).to_csv(output_dir / f"{self.config['metadata'].get("simulation_name", "NoName")}_metrics.csv")
 
     def _extract_data(self,
                       interferogram: np.ndarray,
@@ -189,7 +189,9 @@ class DatasetGenerator:
 
     def _save_metadata(self, output_dir: Path):
         """Guarda metadatos técnicos del dataset"""
+        sim_name = self.config['metadata'].get("simulation_name", "NoName")
         metadata = {
+            "smulation_name": sim_name, 
             "generation_date": pd.Timestamp.now().isoformat(),
             "optical_parameters": self.config["optical_parameters"],
             "image_height": self.config["metadata"].get("image_height", 512),
@@ -198,13 +200,13 @@ class DatasetGenerator:
             "classes": list(self.config["classes"].keys())
         }
         
-        with open(output_dir / "metadata.yaml", 'w') as f:
+        with open(output_dir / f"{sim_name}_metadata.yaml", 'w') as f:
             safe_dump(metadata, f, sort_keys=False)
 
 
 if __name__ == "__main__": 
     config_path = Path(__file__).parent / "configs" / "pure_aberrations.yaml"
-    generator = DatasetGenerator(config_path, print_config=True)
+    generator = DatasetGenerator(config_path)
     
     output_dir = Path("data/testing_generated") 
     generator.generate_dataset(output_dir=output_dir)

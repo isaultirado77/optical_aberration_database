@@ -1,9 +1,12 @@
 # TODO
 
+- [ ] implement multithreading for dataset generation
+- [ ] implement preprocess_data script
+
 - [ ] zernike polynomials.py
     - [X] implement functions
-    - [ ] write doc
-    - [ ] test
+    - [X] write doc
+    - [X] test
 
 - [X] interferogram_generator.py 
     - [X] generate_interferogram (write doc)
@@ -24,6 +27,7 @@
     - [X] configure for .yaml files for configuration
     - [X] use tqdm to show progress (optional)
     - [ ] use argparse for flexibility
+    - [ ] use multithreading
 
 - [ ] generate_dataset.py
     - [X] generate_aberrations

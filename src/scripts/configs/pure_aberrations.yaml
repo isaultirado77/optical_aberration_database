@@ -1,5 +1,6 @@
 metadata:
   author: "isaul"
+  simulation_name: pure_aberrations
   description: "Pure optical aberration dataset with realistic noise profiles"
   license: "CC-BY-NC-SA-4.0"
   date: "2025-04-13"
