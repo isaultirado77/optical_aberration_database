@@ -1,5 +1,5 @@
 smulation_name: pure_aberrations
-generation_date: '2025-04-17T10:42:35.556211'
+generation_date: '2025-04-17T11:54:38.257865'
 optical_parameters:
   wavelength: 632.8nm
   na: 0.25
@@ -23,7 +23,6 @@ noise_profiles:
     max_kernel_size: 21
     intensity: 1.0
 classes:
-- piston
 - ytilt
 - xtilt
 - defocus

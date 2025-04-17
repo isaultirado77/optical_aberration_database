@@ -31,23 +31,13 @@ noise_profiles:
 
 
 classes:
-  piston:
-    coefficients:
-      - [0, 0, -0.1, 0.1]
-    noise:
-      gaussian: true  # Usa valores de default_gaussian
-      poisson: false
-      dust: false
-      vibration: false
-    samples: 100
-
   ytilt:
     coefficients:
       - [1, -1, -2.0, 2.0]
     noise:
       gaussian: true
       vibration: true  # Típico en sistemas mecánicos
-    samples: 100
+    samples: 50
 
   xtilt:
     coefficients:
@@ -55,7 +45,7 @@ classes:
     noise:
       gaussian: true
       vibration: true
-    samples: 100
+    samples: 50
 
   defocus:
     coefficients:
@@ -64,21 +54,21 @@ classes:
       gaussian: true
       poisson: true  # Fundamental en desenfoque
       dust: true     # Partículas en lentes
-    samples: 100
+    samples: 50
 
   primary_astigmatism_0:
     coefficients:
       - [2, -2, -1.2, 1.2]
     noise:
       gaussian: true
-    samples: 100
+    samples: 50
 
   primary_astigmatism_45:
     coefficients:
       - [2, 2, -1.2, 1.2]
     noise:
       gaussian: true
-    samples: 100
+    samples: 50
 
   ycoma:
     coefficients:
@@ -86,7 +76,7 @@ classes:
     noise:
       gaussian: true
       dust: true  # Mayor probabilidad en bordes ópticos
-    samples: 100
+    samples: 50
 
   xcoma:
     coefficients:
@@ -94,21 +84,21 @@ classes:
     noise:
       gaussian: true
       dust: true
-    samples: 100
+    samples: 50
 
   trefoil_0:
     coefficients:
       - [3, -3, -0.6, 0.6]
     noise:
       gaussian: true
-    samples: 100
+    samples: 50
 
   trefoil_30:
     coefficients:
       - [3, 3, -0.6, 0.6]
     noise:
       gaussian: true
-    samples: 100
+    samples: 50
 
   primary_spherical:
     coefficients:
@@ -116,32 +106,32 @@ classes:
     noise:
       gaussian: true
       poisson: true  # Relevante en alta precisión
-    samples: 100
+    samples: 50
 
   secondary_astigmatism_0:
     coefficients:
       - [4, -2, -0.4, 0.4]
     noise:
       gaussian: true
-    samples: 100
+    samples: 50
 
   secondary_astigmatism_45:
     coefficients:
       - [4, 2, -0.4, 0.4]
     noise:
       gaussian: true
-    samples: 100
+    samples: 50
 
   tetrafoil_0:
     coefficients:
       - [4, -4, -0.3, 0.3]
     noise:
       gaussian: true
-    samples: 100
+    samples: 50
 
   tetrafoil_22:
     coefficients:
       - [4, 4, -0.3, 0.3]
     noise:
       gaussian: true
-    samples: 100
+    samples: 50

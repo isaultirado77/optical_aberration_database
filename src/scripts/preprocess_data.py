@@ -1,5 +1,6 @@
 from pathlib import Path
 from typing import List
+import argparse
 import numpy as np
 import cv2
 from sklearn.model_selection import train_test_split
@@ -8,6 +9,7 @@ import yaml
 
 class DataPreprocessor: 
     def __init__(self, config_path: Path):
+        print(config_path)
         self.config = self._load_config(config_path)
         self.rng = np.random.default_rng(self.config["seed"])
 
@@ -68,7 +70,7 @@ class DataPreprocessor:
         # 3. Procesar cada grupo
         for split_name, files in splits.items(): 
             output_dir = Path(self.config["output_dir"]) / split_name
-            output_dir.mkdir(parents=True, exists_ok=True)
+            output_dir.mkdir(parents=True, exist_ok=True)
 
             for file in tqdm(files, desc=f"Processing {split_name}"): 
                 image = cv2.imread(str(file), cv2.IMREAD_UNCHANGED)
@@ -83,6 +85,14 @@ class DataPreprocessor:
                         cv2.imwrite(str(output_dir / f"{file.stem}_aug{i}.tiff"), aug)
 
 if __name__ == "__main__":
-    config = Path("configs/preprocess_config.yaml")
-    preprocessor = DataPreprocessor(config)
+    parser = argparse.ArgumentParser(description="Preprocesamiento de imágenes según un archivo de configuración YAML.")
+    parser.add_argument(
+        "--config",
+        type=Path,
+        default=Path(__file__).parent / "configs" / "preprocess_config.yaml",
+        help="Ruta al archivo de configuración YAML (por defecto: configs/preprocess_config.yaml)."
+    )
+    args = parser.parse_args()
+
+    preprocessor = DataPreprocessor(args.config)
     preprocessor.run()
