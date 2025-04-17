@@ -205,10 +205,50 @@ class DatasetGenerator:
 
 
 if __name__ == "__main__": 
-    config_path = Path(__file__).parent / "configs" / "pure_aberrations.yaml"
-    generator = DatasetGenerator(config_path)
+    parser = argparse.ArgumentParser(
+        description='Generador de datasets de aberraciones ópticas',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
     
-    output_dir = Path("data/testing_generated") 
-    generator.generate_dataset(output_dir=output_dir)
+    parser.add_argument(
+        '-c', '--config',
+        type=Path,
+        default=Path(__file__).parent / "configs" / "pure_aberrations.yaml",
+        help='Ruta al archivo de configuración YAML'
+    )
+    
+    parser.add_argument(
+        '-o', '--output',
+        type=Path,
+        default=Path("data/generated_pure_aberrations"),
+        help='Directorio de salida para los datos generados'
+    )
+    
+    parser.add_argument(
+        '--print-config',
+        action='store_true',
+        help='Mostrar la configuración cargada y salir'
+    )
+    
+    parser.add_argument(
+        '--seed',
+        type=int,
+        default=42,
+        help='Semilla para reproducibilidad'
+    )
+    
+    args = parser.parse_args()
 
+    # Validar rutas
+    if not args.config.exists():
+        raise FileNotFoundError(f"Archivo de configuración no encontrado: {args.config}")
+    
+    args.output.mkdir(parents=True, exist_ok=True)
+    
+    # Inicializar generador
+    generator = DatasetGenerator(
+        config_path=args.config,
+        print_config=args.print_config
+    )
+    generator.generate_dataset(args.output)
     
