@@ -38,9 +38,8 @@
 - [ ] investigate licences and creative commons
 - [ ] investigate multiprocessing for optimization of the dataset generation.  
 
-git commit -m "feat(blur): enhance motion blur and dataset prep
-
-- Rewrite add_random_motion_blur() with:
-  * Fixed kernel generation
-  * Multi-channel support
-- Normalize pure_aberrations syntax"
+git commit -m "
+feat: 
+implemented: 
+changed: 
+"
