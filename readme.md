@@ -71,6 +71,44 @@ classes:
 ```
 
 ### Generar datos procesados
+Preprocesa imágenes crudas (TIFF) para normalización, aumento de datos y división en conjuntos:
+
+```bash
+python -m src.scripts.preprocess_data \
+    --input_dir data/generated_pure_aberrations/raw \
+    --output_dir data/processed \
+    --config configs/preprocess_config.yaml
+```
+
+**Parámetros clave**:  
+| Argumento      | Descripción                                  | Valor por defecto               |
+|----------------|---------------------------------------------|---------------------------------|
+| `--input_dir`  | Directorio con imágenes TIFF crudas          | *(Obligatorio)*                 |
+| `--output_dir` | Directorio de salida para datos procesados   | *(Obligatorio)*                 |
+| `--config`     | Ruta al archivo YAML de configuración       | `configs/preprocess_config.yaml` |
+
+**Estructura de salida**:  
+```
+output_dir/
+├── train/            # 70% de imágenes + aumentos
+├── val/              # 15% de imágenes  
+└── test/             # 15% de imágenes
+```
+
+**Ejemplo de configuración YAML**:  
+```yaml
+normalize:
+  type: "8bit"       # Opciones: "8bit" o "float"
+
+augmentation:
+  copies: 2          # Número de aumentos por imagen
+  rotation: true     # Rotaciones aleatorias (±15°)
+  noise: true        # Añade ruido gaussiano
+
+split:
+  test: 0.15         # Proporción para test
+  val: 0.15          # Proporción para validación
+```
 
 ## Métricas Generadas
 El dataset incluye automáticamente:

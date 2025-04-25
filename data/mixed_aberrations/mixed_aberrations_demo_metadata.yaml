@@ -1,0 +1,16 @@
+smulation_name: mixed_aberrations_demo
+generation_date: '2025-04-25T11:07:32.859310'
+optical_parameters:
+  wavelength: 632.8nm
+image_height: 256
+image_width: 256
+noise_profiles:
+  default_gaussian:
+    sigma_percent: 0.3
+    clip: true
+classes:
+- defocus_astigmatism
+- coma_spherical
+- astigmatism_trefoil
+- defocus_coma
+- spherical_tilt

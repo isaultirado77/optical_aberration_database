@@ -1,8 +1,7 @@
 metadata:
   author: "isaul"
   simulation_name: pure_aberrations
-  description: "Pure optical aberration dataset with realistic noise profiles"
-  license: "CC-BY-NC-SA-4.0"
+  description: "Conjunto de datos de aberraciones ópticas puras con perfiles de ruido realistas"
   date: "2025-04-13"
   seed: 42
   image_height: 256
@@ -11,7 +10,6 @@ metadata:
 
 optical_parameters:
   wavelength: 632.8nm
-  na: 0.25
   pixel_size: 5.86µm
   wavefront_units: µm
 

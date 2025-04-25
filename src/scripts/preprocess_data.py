@@ -87,24 +87,24 @@ class DataPreprocessor:
                         cv2.imwrite(str(split_output_dir / f"{file.stem}_aug{i}.tiff"), aug)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Preprocesamiento de imágenes según el archivo de configuración YAML.")
+    parser = argparse.ArgumentParser(description='Preprocesamiento de imágenes según el archivo de configuración YAML.')
     parser.add_argument(
-        "--config",
+        '--config',
         type=Path,
         default=Path(__file__).parent.parent.parent / "configs" / "preprocess_config.yaml",
-        help="Ruta al archivo de configuración YAML (por defecto: configs/preprocess_config.yaml)."
+        help='Ruta al archivo de configuración YAML (por defecto: configs/preprocess_config.yaml).'
     )
     parser.add_argument(
-        "--input_dir",
+        '-i', '--input_dir',
         type=Path,
         required=True,
-        help="Ruta al directorio de imágenes TIFF de entrada."
+        help='Ruta al directorio de imágenes TIFF de entrada.'
     )
     parser.add_argument(
-        "--output_dir",
+        '-o', '--output_dir',
         type=Path,
         required=True,
-        help="Ruta al directorio de salida para guardar imágenes procesadas."
+        help='Ruta al directorio de salida para guardar imágenes procesadas.'
     )
 
     args = parser.parse_args()
