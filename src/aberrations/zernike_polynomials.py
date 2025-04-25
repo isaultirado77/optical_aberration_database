@@ -47,7 +47,7 @@ def generate_wavefront(coefficients: Dict[Tuple[int, int], float],
     rho = np.sqrt(xx**2 + yy**2)
     theta = np.arctan2(yy, xx)
 
-    # Inivializar frente de onda
+    # Inicializar frente de onda
     wavefront = np.zeros(shape)
     for (n, m), coeff in coefficients.items(): 
         wavefront += coeff * zernike_polynomial(n, m, rho, theta)

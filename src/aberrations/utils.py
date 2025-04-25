@@ -143,12 +143,7 @@ def add_random_motion_blur(image: np.ndarray,
     
     kernel = get_random_motion_blur_kernel(ksize)
     
-    # Manejo para imágenes en color (3 canales)
-    if len(image.shape) == 3:
-        blurred = np.stack([cv2.filter2D(image[..., i], -1, kernel) 
-                          for i in range(3)], axis = -1)
-    else:
-        blurred = cv2.filter2D(image, -1, kernel)
+    blurred = cv2.filter2D(image, -1, kernel)
     
     return cv2.addWeighted(image, 1 - intensity, blurred, intensity, 0)
 

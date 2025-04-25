@@ -85,7 +85,7 @@ class DataPreprocessor:
                         cv2.imwrite(str(output_dir / f"{file.stem}_aug{i}.tiff"), aug)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Preprocesamiento de imágenes según un archivo de configuración YAML.")
+    parser = argparse.ArgumentParser(description="Preprocesamiento de imágenes según el archivo de configuración YAML.")
     parser.add_argument(
         "--config",
         type=Path,

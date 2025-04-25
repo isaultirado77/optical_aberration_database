@@ -6,6 +6,7 @@ from typing import List, Dict, Tuple
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
+
 from src.aberrations import (
     generate_interferogram, 
     add_gaussian_noise, 
@@ -66,7 +67,7 @@ class DatasetGenerator:
         }
 
     def _apply_noises(self, image: np.ndarray, noise_config: Dict[str, bool]) -> np.ndarray:
-        """Aplica ruidos según la configuración"""
+        """Aplica ruidos según la configuración."""
         # Gaussian
         if noise_config.get("gaussian", False):
             params = self.config["noise_profiles"]["default_gaussian"]
@@ -100,13 +101,14 @@ class DatasetGenerator:
 
 
     def generate_dataset(self, output_dir: Path):
-        """Genera el dataset completo"""
+        """Genera el dataset completo."""
         output_dir.mkdir(parents=True, exist_ok=True)
-        metrics_data = []
         
         # Directorios de salida
         raw_dir = output_dir / "raw"
         raw_dir.mkdir(exist_ok=True)
+
+        metrics_data = []
         
         # Generar imágenes para cada clase
         for class_name, class_config in tqdm(
@@ -157,8 +159,8 @@ class DatasetGenerator:
         """Extrae todas las métricas y coeficientes para guardar en CSV"""
 
         intems_view = coefficients.items()
-        interator = iter(intems_view)
-        tuple_pair = next(interator)
+        iterator = iter(intems_view)
+        tuple_pair = next(iterator)
         (n, m), coeff = tuple_pair  # usar next(iter(coefficients.items()))
         stats = calculate_statistics(interferogram)
         wavefront_metrics = calculate_wavefront_error(interferogram)

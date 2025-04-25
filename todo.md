@@ -38,8 +38,4 @@
 - [ ] investigate licences and creative commons
 - [ ] investigate multiprocessing for optimization of the dataset generation.  
 
-git commit -m "
-feat: 
-implemented: 
-changed: 
-"
+git commit -m "implemented: processing_data.py ready for testing"
