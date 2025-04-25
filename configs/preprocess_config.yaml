@@ -1,6 +1,3 @@
-input_dir: "data/generated_pure_aberrations/raw"          # Directorio de imágenes generadas
-output_dir: "data/generated_pure_aberrations"   # Directorio de salida
-
 seed: 42                       # Semilla para reproducibilidad
 
 normalize:

@@ -215,7 +215,7 @@ if __name__ == "__main__":
     parser.add_argument(
         '-c', '--config',
         type=Path,
-        default=Path(__file__).parent / "configs" / "pure_aberrations.yaml",
+        default=Path(__file__).parent.parent.parent / "configs" / "pure_aberrations.yaml",
         help='Ruta al archivo de configuración YAML'
     )
     

@@ -38,7 +38,7 @@ python -m src.scripts.generate_dataset \
     -o data/my_dataset
 ```
 
-### Parámetros clave vía CLI:
+#### Parámetros clave vía CLI:
 ```bash
 # Ver todas las opciones
 python -m src.scripts.generate_dataset --help
@@ -50,7 +50,7 @@ python -m src.scripts.generate_dataset \
     --seed 12345
 ```
 
-## Configuración YAML
+#### Configuración YAML
 Ejemplo mínimo (`configs/demo.yaml`):
 ```yaml
 metadata:
@@ -69,6 +69,8 @@ classes:
     noise:
       gaussian: true
 ```
+
+### Generar datos procesados
 
 ## Métricas Generadas
 El dataset incluye automáticamente:
