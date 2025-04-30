@@ -4,7 +4,7 @@
 
 ## **Descripción General**  
 
-Los datasets generados por este sistema son **colecciones sintéticas de interferogramas** que simulan aberraciones ópticas en condiciones de laboratorio controladas. Cada dataset incluye:  
+Los datasets generados por este sistema son **colecciones interferogramas de sintéticos** que simulan aberraciones ópticas en condiciones de laboratorio controladas. Cada dataset incluye:  
 
 - **Imágenes crudas**: Interferogramas en formato TIFF 16-bit (256x256px a 1024x1024px).  
 - **Metadatos técnicos**: Configuración exacta de aberraciones y ruidos aplicados.  

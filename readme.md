@@ -1,15 +1,47 @@
 # Optical Aberration Database Generator
 
 ## Descripción
-Sistema para generar datasets sintéticos de aberraciones ópticas simuladas mediante polinomios de Zernike, con capacidad de añadir ruidos físicamente realistas. Características clave:  
+Sistema para generar datasets sintéticos de aberraciones ópticas simuladas mediante polinomios de Zernike, con capacidad de añadir ruidos físicamente realistas.  
 
-- **Simulación física precisa**: Genera interferogramas sintéticos con aberraciones definidas por coeficientes de Zernike.  
-- **Control detallado**: Ajuste independiente de modos de aberración clásicos (tilt, defocus, astigmatismo, coma, trefoil, etc.).  
-- **Ruidos realistas**: Incorpora modelos físicos de:  
-  - Ruido gaussiano (electrónico del sensor)  
-  - Ruido Poisson (naturaleza cuántica de la luz)  
-  - Partículas de polvo (artefactos ópticos)  
-  - Vibración mecánica (desenfoque por movimiento)  
+**Características clave**:  
+- **Simulación física precisa**: Interferogramas con aberraciones ópticas personalizables usando polinomios de Zernike
+- **Control detallado**: Sistema de configuración para:  
+  - Combinar múltiples modos de aberración  
+  - Parametrizar coeficientes (±λ) y muestras por clase  
+  - Reproducir experimentos mediante semillas
+  *(Ver [Configuraciones Avanzadas](docs/configs_spects.md))*  
+- **Ruidos realistas**: [Modelos físicos documentados](docs/noise_models.md) con control de:  
+  - Intensidad de ruido (σ gaussiano, densidad de polvo, de Poisson)  
+  - Perfiles de movimeinto (vibración mecánica)  
+
+## Conjuntos de Datos Disponibles
+
+El repositorio incluye actualmente dos tipos de datasets pregenerados para distintos casos de uso:
+
+### 1. Aberraciones Puras (`data/pure_aberrations`)
+Contiene interferogramas con modos Zernike individuales, ideales para:
+- Entrenamiento de modelos de clasificación
+- Estudio de aberraciones aisladas
+- Calibración de sistemas ópticos
+
+![Muestra: Aberraciones Puras](visualization/gifs/pure_aberrations_preview.gif){: width="250"}
+
+*Dataset generado con la configuracion en configs/pure_aberrations.yaml*
+
+---
+
+### 2. Aberraciones Mixtas (`data/mixed_aberrations`)
+Combina múltiples modos Zernike con ruido físico, diseñado para:
+- Simulación de condiciones realistas
+- Validación de algoritmos de reconstrucción
+
+![Muestra: Aberraciones Mixtas](visualization/gifs/mixed_aberrations_preview.gif){: width="250"}
+*Dataset generado con la configuracion en configs/mixed_aberrations.yaml*
+
+**Características comunes**:
+- Formato: TIFF 16-bit (512×512px)
+- Metadatos: Incluyen coeficientes Zernike exactos
+- Métricas: 20+ parámetros de calidad óptica ([detalles](docs/metrics_details.md))
 
 ## Instalación
 ```bash
@@ -22,109 +54,87 @@ pip install -r requirements.txt
 ```
 ├── configs/                   # Plantillas YAML de configuración
 ├── data/                      # Datasets generados
+├── examples/                  # Ejemplos de uso
 ├── src/
 │   ├── aberrations/           # Generación de aberraciones
 │   ├── metrics/               # Cálculo de métricas
-│   └── scripts/               # Scripts para generar y preprocesar datasets
+│   └── scripts/               # Scripts CLI para generación y preprocesamiento
+├── visualization/             # Animaciones y gráficos
 ├── tests/                     # Pruebas unitarias
 └── docs/                      # Documentación técnica
 ```
 
 ## Uso Básico
-### Generar dataset con configuración predeterminada:
+### Generación de Datasets
 ```bash
+# Dataset básico
 python -m src.scripts.generate_dataset \
     -c configs/pure_aberrations.yaml \
-    -o data/my_dataset
-```
+    -o data/pure_aberrations
 
-#### Parámetros vía CLI:
-```bash
-# Ver todas las opciones
-python -m src.scripts.generate_dataset --help
-
-# Ejemplo avanzado
+# Configuración personalizada
 python -m src.scripts.generate_dataset \
-    --config custom_config.yaml \
-    --output path/to/output \
-    --seed 12345
+    --config configs/demo.yaml \
+    --output data/demo_output\
+    --seed 42
 ```
 
-#### Configuración YAML
-Ejemplo mínimo (`configs/demo.yaml`):
-```yaml
-metadata:
-  simulation_name: "demo_set"
-  image_width: 512
-  image_height: 512
-
-noise_profiles:
-  default_gaussian:
-    sigma_percent: 0.5
-
-classes:
-  defocus:
-    coefficients: [[2, 0, -1.5, 1.5]]
-    samples: 100
-    noise:
-      gaussian: true
-```
-
-### Generar datos procesados
-Preprocesa imágenes crudas (TIFF) para normalización, aumento de datos y división en conjuntos:
-
+### Preprocesamiento
 ```bash
 python -m src.scripts.preprocess_data \
-    --input_dir data/generated_pure_aberrations/raw \
-    --output_dir data/processed \
+    --input_dir data/demo_output/raw \
+    --output_dir data/demo_output/processed \
     --config configs/preprocess_config.yaml
 ```
-
-**Parámetros clave**:  
-| Argumento      | Descripción                                  | Valor por defecto               |
-|----------------|---------------------------------------------|---------------------------------|
-| `--input_dir`  | Directorio con imágenes TIFF crudas          | *(Obligatorio)*                 |
-| `--output_dir` | Directorio de salida para datos procesados   | *(Obligatorio)*                 |
-| `--config`     | Ruta al archivo YAML de configuración       | `configs/preprocess_config.yaml` |
-
-**Estructura de salida**:  
-```
-output_dir/
-├── train/            # 70% de imágenes + aumentos
-├── val/              # 15% de imágenes  
-└── test/             # 15% de imágenes
-```
-
-**Ejemplo de configuración YAML**:  
-```yaml
-normalize:
-  type: "8bit"       # Opciones: "8bit" o "float"
-
-augmentation:
-  copies: 2          # Número de aumentos por imagen
-  rotation: true     # Rotaciones aleatorias (±15°)
-  noise: true        # Añade ruido gaussiano
-
-split:
-  test: 0.15         # Proporción para test
-  val: 0.15          # Proporción para validación
-```
+*Consular la [documentación](docs/dataset_spects.md) para detalles generación y procesamiento de datos.*
 
 ## Métricas Generadas
-El dataset incluye automáticamente:
+El sistema calcula automáticamente 20+ métricas por imagen, incluyendo:  
 
-| Categoría          | Métricas Incluidas                     |
-|--------------------|----------------------------------------|
-| Estadísticas       | Media, varianza, asimetría (skewness), curtosis, energía, entropía|
-| Calidad de imagen  | PSNR, SSIM, relación Strehl            |
-| Texturas          | Características de Haralick            |
-| Zernike           | Coeficientes (n, m) e intensidad por imagen         |
+| Categoría          | Métricas Clave | Documentación |
+|--------------------|----------------|---------------|
+| Estadísticas       | Entropía, Curtosis | [Detalles](docs/metrics_details.md) |
+| Calidad Óptica     | Strehl Ratio, RMS | [Teoría](docs/optical_aberrations.md) |
+| Texturas           | Haralick Features | [Referencia](docs/dataset_spects.md) |
 
 ## Documentación Técnica
-[Ver documentación detallada](docs/) para:
-- Teoría matemática de polinomios de Zernike
-- Modelado físico de ruidos ópticos
-- Especificación de formatos de archivo
+
+- [Teoría de Polinomios de Zernike](docs/optical_aberrations.md)  
+  Fundamentos matemáticos de los polinomios ortogonales y su relación con aberraciones ópticas clásicas (defocus, astigmatismo, coma, etc.).
+
+- [Modelos de Ruido](docs/noise_models.md)  
+  Implementación física de 4 tipos de ruido:  
+  - Gaussiano (electrónico)  
+  - Poisson (cuántico)  
+  - Partículas de polvo  
+  - Vibración mecánica  
+  *Incluye interpretación física y descripcion de parámetros de configuración*.
+
+- [Especificación de Datasets](docs/dataset_spects.md)  
+  Estructura completa de archivos generados:  
+  - Formato TIFF 16-bit  
+  - Metadatos técnicos (YAML)  
+  - Métricas en CSV  
+  - Jerarquía de directorios recomendada.
+
+- [Configuraciones Avanzadas](docs/configs_spects.md)  
+  Guía detallada de archivos de configuración YAML para:  
+  - Combinación de modos Zernike (`coefficients`)  
+  - Perfiles de ruido (`noise_profiles`)  
+  - Metadatos de simulación (`metadata`)  
+
+- [Referencia de Métricas](docs/metrics_details.md)  
+  Catálogo de 20+ métricas calculadas automáticamente:  
+  - **Estadísticas**: Entropía, curtosis, energía  
+  - **Calidad óptica**: RMS, Strehl ratio, PSNR  
+  - **Texturas**: Características de Haralick  
+  *Con fórmulas matemáticas y rangos típicos*.
+
+- [Modos Zernike e Implementación](docs/zernike_modes_reference.md)  
+  Detalles técnicos del generador de interferogramas:  
+  - Ejemplos de código para combinaciones complejas  
+  - Visualización de frentes de onda  
+
 
 ## Contribución
 1. Haz fork del proyecto

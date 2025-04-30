@@ -57,10 +57,8 @@ def generate_wavefront(coefficients: Dict[Tuple[int, int], float],
 
 def plot_wavefront(wavefront: np.ndarray, 
                    title: str = "Aberrated wavefront", 
-                   cmap: str = "jet", 
+                   cmap: str = "viridis", 
                    show_colorbar: bool = True) -> None:
-    """
-    """
 
     plt.figure(figsize=(8, 6))
     plt.imshow(wavefront, cmap=cmap)

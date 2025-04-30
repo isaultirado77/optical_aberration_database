@@ -113,7 +113,7 @@ Muestra el frente de onda aberrado:
 ```python  
 def plot_wavefront(wavefront: np.ndarray,  
                    title: str = "Aberrated wavefront",  
-                   cmap: str = "jet") -> None:  
+                   cmap: str = "viridis") -> None:  
     plt.imshow(wavefront, cmap=cmap)  
     plt.colorbar(label="Amplitude (λ)")  
     plt.title(title)  
@@ -126,6 +126,23 @@ coefficients = {(3, 1): 0.8, (2, -2): -0.5}  # Coma + Astigmatismo
 wavefront = generate_wavefront(coefficients)  
 plot_wavefront(wavefront, title="Coma + Astigmatismo")  
 ```  
+
+---
+### **Ejemplos Visuales**
+
+#### 1. Aberración Pura (Defocus)
+![Defocus Z₂⁰](/visualization/plots/defocus_wavefront.png){: width="300" height="300"}  
+**Coeficientes**: `{(2,0): 1.5}`  
+- Modo esférico simétrico típico en sistemas desenfocados.
+
+#### 2. Aberración Mixta (Coma + Astigmatismo)
+![Coma + Astigmatismo](/visualization/plots/coma_astigmatism_wavefront.png){: width="300" height="300"}  
+**Coeficientes**: `{(3,1): 0.8, (2,-2): -0.5}`  
+- Distorsión asimétrica (coma) combinada con elongación axial (astigmatismo).
+
+#### 3. Aberraciones de Alto Orden
+![Alto Orden](/visualization/plots/high_order_wavefront.png){: width="300" height="300"}- Combinación de aberración esférica, trefoil y tilt.
+
 
 ---
 

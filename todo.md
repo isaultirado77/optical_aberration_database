@@ -39,12 +39,12 @@
 - [ ] investigate multiprocessing for optimization of the dataset generation.  
 
 git commit -m "
+version 1.0 ready:
+implemented: visualization/animation scripts for generation 
+of plots and gifs used in documentation 
 - [ ] docs
-    - [X] config_spects
-    - [X] noise_models
-    - [X] optical_aberrations
-    - [X] dataset_spects
     - [ ] metrics_details
-    - [ ] zernike_modes_reference
-    - [ ] visualization
+    - [X] zernike_modes_reference
+    - [X] visualization
+    - [X] need to check typos; 
 "
