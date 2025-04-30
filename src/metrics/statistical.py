@@ -2,7 +2,6 @@ import numpy as np
 from typing import Dict
 
 
-
 def calculate_mean(image: np.ndarray) -> float:
     """Calcula la media de los valores de píxel"""
     return float(np.mean(image))

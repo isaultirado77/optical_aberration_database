@@ -4,7 +4,7 @@
 Sistema para generar datasets sintéticos de aberraciones ópticas simuladas mediante polinomios de Zernike, con capacidad de añadir ruidos físicamente realistas. Características clave:  
 
 - **Simulación física precisa**: Genera interferogramas sintéticos con aberraciones definidas por coeficientes de Zernike.  
-- **Control detallado**: Ajuste independiente de 14 modos de aberración clásicos (tilt, defocus, astigmatismo, coma, trefoil, etc.).  
+- **Control detallado**: Ajuste independiente de modos de aberración clásicos (tilt, defocus, astigmatismo, coma, trefoil, etc.).  
 - **Ruidos realistas**: Incorpora modelos físicos de:  
   - Ruido gaussiano (electrónico del sensor)  
   - Ruido Poisson (naturaleza cuántica de la luz)  
@@ -38,7 +38,7 @@ python -m src.scripts.generate_dataset \
     -o data/my_dataset
 ```
 
-#### Parámetros clave vía CLI:
+#### Parámetros vía CLI:
 ```bash
 # Ver todas las opciones
 python -m src.scripts.generate_dataset --help

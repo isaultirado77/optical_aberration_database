@@ -1,6 +1,3 @@
-"""
-"""
-
 from .interferogram_generator import generate_interferogram
 from .utils import (
     add_gaussian_noise,
