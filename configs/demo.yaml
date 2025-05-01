@@ -1,10 +1,10 @@
 metadata:
   simulation_name: "demo_aberrations"
-  image_width: 512
-  image_height: 512
+  image_width: 256
+  image_height: 256
 
 optical_parameters:
-  wavelength: "532nm"
+  wavelength: "632.8nm"
 
 noise_profiles:
   default_gaussian:
