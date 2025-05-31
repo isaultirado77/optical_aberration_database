@@ -29,7 +29,7 @@ nombre_dataset/
 ### **Contenido Generado**  
 | Componente               | Descripción |  
 |--------------------------|-------------|  
-| **Imágenes TIFF (raw/)** | Interferogramas en 16-bit (0-65535) con aberraciones aplicadas. |  
+| **Imágenes TIFF (raw/)** | Interferogramas en 8-bit (0-256) (o float, entre 0 y 1) con aberraciones aplicadas. |  
 | **metadata.yaml**        | Copia de la configuración YAML usada, incluyendo: <br> - Parámetros ópticos (λ, resolución) <br> - Coeficientes Zernike por clase <br> - Perfiles de ruido aplicados. |  
 | **metrics.csv**          | Datos cuantitativos por imagen: <br> - Modos Zernike (n, m, coeff) <br> - RMS, Strehl, PSNR, SSIM <br> - Estadísticas (media, entropía, etc.). |  
 
@@ -71,7 +71,7 @@ python -m src.scripts.generate_dataset \
     -o data/demo_output
 ```  
 **Genera**:  
-- `data/demo_output/raw/*.tiff` (imágenes)  
+- `data/demo_output/raw/*.tiff` (imágenes crudas)  
 - `data/demo_output/metrics.csv` (métricas)  
 - `data/demo_output/metadata.yaml` (metadata)
 

@@ -4,10 +4,10 @@
 Sistema para generar datasets sintéticos de aberraciones ópticas simuladas mediante polinomios de Zernike, con capacidad de añadir ruidos físicamente realistas.  
 
 **Características clave**:  
-- **Simulación física precisa**: Interferogramas con aberraciones ópticas personalizables usando polinomios de Zernike
-- **Control detallado**: Sistema de configuración para:  
+- **Simulación física precisa**: Interferogramas de aberraciones ópticas personalizables usando polinomios de Zernike
+- **Control detallado**: EL sistema está diseñado para:  
   - Combinar múltiples modos de aberración  
-  - Parametrizar coeficientes (±λ) y muestras por clase  
+  - Parametrizar coeficientes y muestras por clase  
   - Reproducir experimentos mediante semillas
   *(Ver [Configuraciones Avanzadas](docs/configs_spects.md))*  
 - **Ruidos realistas**: [Modelos físicos documentados](docs/noise_models.md) con control de:  
@@ -100,7 +100,7 @@ El sistema calcula automáticamente 20+ métricas por imagen, incluyendo:
 ## Documentación Técnica
 
 - [Teoría de Polinomios de Zernike](docs/optical_aberrations.md)  
-  Fundamentos matemáticos de los polinomios ortogonales y su relación con aberraciones ópticas clásicas (defocus, astigmatismo, coma, etc.).
+  Fundamentos matemáticos de los polinomios de Zernike y su relación con aberraciones ópticas clásicas (defocus, astigmatismo, coma, etc.).
 
 - [Modelos de Ruido](docs/noise_models.md)  
   Implementación física de 4 tipos de ruido:  
@@ -112,7 +112,7 @@ El sistema calcula automáticamente 20+ métricas por imagen, incluyendo:
 
 - [Especificación de Datasets](docs/dataset_spects.md)  
   Estructura completa de archivos generados:  
-  - Formato TIFF 16-bit  
+  - Formato TIFF 8-bit  
   - Metadatos técnicos (YAML)  
   - Métricas en CSV  
   - Jerarquía de directorios recomendada.

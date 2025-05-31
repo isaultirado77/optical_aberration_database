@@ -5,7 +5,7 @@
 ```yaml
 metadata:
   author: "Nombre del Autor"
-  simulation_name: "nombre_unico"
+  simulation_name: "nombre_unico_de_simulación"
   description: "Descripción del dataset"
   image_width: 256    # Ancho en píxeles
   image_height: 256   # Alto en píxeles
@@ -40,7 +40,7 @@ classes:
 
 ---
 
-- Para consultar más [documentación detallada](docs/noise_models.md) respecto a la configuración de ruidos consultar `docs/noise_models.md`. 
+- Para consultar [información](docs/noise_models.md) respecto a la configuración de ruidos consultar `docs/noise_models.md`. 
 
 ### **2. Configuración para Preprocesamiento (`preprocess_data.py`)**
 #### **Estructura Básica**
